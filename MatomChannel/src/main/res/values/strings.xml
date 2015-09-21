@@ -13,5 +13,10 @@
 
     <string name="app_name">まとめのまとめ</string>
 
+    <string name="title_section1">新着</string>
+    <string name="title_section2">今日の人気</string>
+    <string name="title_section3">今週の人気</string>
+    <string name="title_section4">今年の人気</string>
+
     <string name="action_settings">Settings</string>
 </resources>

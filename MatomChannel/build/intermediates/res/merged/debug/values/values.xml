@@ -205,6 +205,14 @@
     <!-- From: file:/Users/himara2/Documents/android/Matome/MatomChannel/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <string name="status_bar_notification_info_overflow">999+</string>
+    <!-- From: file:/Users/himara2/Documents/android/Matome/MatomChannel/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="title_section1">新着</string>
+    <string name="title_section2">今日の人気</string>
+    <string name="title_section3">今週の人気</string>
+    <string name="title_section4">今年の人気</string>
+    <!-- From: file:/Users/himara2/Documents/android/Matome/MatomChannel/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
+    <eat-comment/>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>
@@ -213,6 +221,9 @@
     <eat-comment/>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:colorPrimaryDark">#00695C</item>
+        <item name="android:colorPrimary">#00897B</item>
+        <item name="android:colorAccent">#FFD54F</item>
     </style>
     <!-- From: file:/Users/himara2/Documents/android/Matome/MatomChannel/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>

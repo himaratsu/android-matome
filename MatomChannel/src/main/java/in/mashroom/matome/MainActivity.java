@@ -8,9 +8,11 @@
  */
 package in.mashroom.matome;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -18,7 +20,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TabHost;
+import android.widget.TabWidget;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -34,8 +39,10 @@ import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
 
-  ListView lv;
   MainActivity mActivity;
+  SectionsPagerAdapter mSectionsPagerAdapter;
+  ViewPager mViewPager;
+  TabHost tabHost;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -45,39 +52,51 @@ public class MainActivity extends ActionBarActivity {
 
     ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
-    lv = (ListView)findViewById(R.id.listView1);
-    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-      @Override
-      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ParseObject parseObject = (ParseObject) parent.getItemAtPosition(position);
-        Toast.makeText(mActivity, parseObject.getString("link"), Toast.LENGTH_SHORT).show();
+    // Create the adapter that will return a fragment for each of the three
+    // primary sections of the activity.
+    mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this);
 
-        Uri uri = Uri.parse(parseObject.getString("link"));
-        Intent i = new Intent(Intent.ACTION_VIEW,uri);
-        startActivity(i);
+    // Set up the ViewPager with the sections adapter.
+    mViewPager = (ViewPager) findViewById(R.id.pager);
+    mViewPager.setAdapter(mSectionsPagerAdapter);
+
+    tabHost = (TabHost) findViewById(android.R.id.tabhost);
+    tabHost.setup();
+
+    // タブ間の区切り線を消す
+    TabWidget tabWidget = (TabWidget) findViewById(android.R.id.tabs);
+    tabWidget.setStripEnabled(false);
+    tabWidget.setShowDividers(LinearLayout.SHOW_DIVIDER_NONE);
+
+    // ActionBar下の影を消す
+//    getActionBar().setElevation(0);
+
+    // タブ下に影を出す
+//    float elevation = 4 * getResources().getDisplayMetrics().density;
+//    tabHost.setElevation(elevation);
+
+    for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
+      tabHost.addTab(tabHost
+              .newTabSpec(String.valueOf(i))
+              .setIndicator(mSectionsPagerAdapter.getPageTitle(i))
+              .setContent(android.R.id.tabcontent));
+    }
+
+    tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+      @Override
+      public void onTabChanged(String tabId) {
+        mViewPager.setCurrentItem(Integer.valueOf(tabId));
       }
     });
 
-    fetchParse();
-
-  }
-
-  public void fetchParse() {
-    ParseQuery<ParseObject> query = ParseQuery.getQuery("Entry");
-    FindCallback<ParseObject> callback = new FindCallback<ParseObject>() {
+    mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
       @Override
-      public void done(List<ParseObject> results, com.parse.ParseException e) {
-        if (results == null) {
-          Log.d("entry", "The getFirst request failed.");
-        } else {
-          Log.d("entry", "Retrieved the object." + results.get(0).getString("title"));
-
-          CustomListItemAdapter adapter = new CustomListItemAdapter(mActivity, results);
-          lv.setAdapter(adapter);
-        }
+      public void onPageSelected(int position) {
+        super.onPageSelected(position);
+        tabHost.setCurrentTab(position);
       }
-    };
-    query.findInBackground(callback);
+    });
+
   }
 
   @Override
