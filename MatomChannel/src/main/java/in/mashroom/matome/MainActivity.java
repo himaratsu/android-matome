@@ -15,15 +15,18 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabWidget;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -43,12 +46,17 @@ public class MainActivity extends ActionBarActivity {
   SectionsPagerAdapter mSectionsPagerAdapter;
   ViewPager mViewPager;
   TabHost tabHost;
+  View indicator;
+  TabWidget tabWidget;
 
-  @Override
+    @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     mActivity = this;
     setContentView(R.layout.activity_main);
+
+    Log.d("debug", "onCreate");
+    Toast.makeText(this, "Hellooooo", Toast.LENGTH_SHORT).show();
 
     ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
@@ -64,23 +72,30 @@ public class MainActivity extends ActionBarActivity {
     tabHost.setup();
 
     // タブ間の区切り線を消す
-    TabWidget tabWidget = (TabWidget) findViewById(android.R.id.tabs);
+    tabWidget = (TabWidget) findViewById(android.R.id.tabs);
     tabWidget.setStripEnabled(false);
     tabWidget.setShowDividers(LinearLayout.SHOW_DIVIDER_NONE);
 
+    LayoutInflater inflater = LayoutInflater.from(this);
+    for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
+      TextView tv = (TextView) inflater.inflate(R.layout.tab_widget, tabWidget, false);
+      tv.setText(mSectionsPagerAdapter.getPageTitle(i));
+
+      tabHost.addTab(tabHost
+                .newTabSpec(String.valueOf(i))
+                .setIndicator(tv)
+                .setContent(android.R.id.tabcontent));
+    }
+
+    indicator = findViewById(R.id.indicator);
+    mViewPager.setOnPageChangeListener(new PageChangeListener());
+
     // ActionBar下の影を消す
-//    getActionBar().setElevation(0);
+    getSupportActionBar().setElevation(0);
 
     // タブ下に影を出す
-//    float elevation = 4 * getResources().getDisplayMetrics().density;
-//    tabHost.setElevation(elevation);
-
-    for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-      tabHost.addTab(tabHost
-              .newTabSpec(String.valueOf(i))
-              .setIndicator(mSectionsPagerAdapter.getPageTitle(i))
-              .setContent(android.R.id.tabcontent));
-    }
+    float elevation = 4 * getResources().getDisplayMetrics().density;
+    tabHost.setElevation(elevation);
 
     tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
       @Override
@@ -89,15 +104,41 @@ public class MainActivity extends ActionBarActivity {
       }
     });
 
-    mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
-      @Override
-      public void onPageSelected(int position) {
-        super.onPageSelected(position);
-        tabHost.setCurrentTab(position);
-      }
-    });
-
   }
+
+    private class PageChangeListener implements ViewPager.OnPageChangeListener {
+        private int scrollingState = ViewPager.SCROLL_STATE_IDLE;
+
+        @Override
+        public void onPageSelected(int position) {
+            // スクロール中はonPageScrolled()で描画するのでここではしない
+            if (scrollingState == ViewPager.SCROLL_STATE_IDLE) {
+                updateIndicatorPosition(position, 0);
+            }
+            tabWidget.setCurrentTab(position);
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+            scrollingState = state;
+        }
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            updateIndicatorPosition(position, positionOffset);
+        }
+
+        private void updateIndicatorPosition(int position, float positionOffset) {
+            View tabView = tabWidget.getChildTabViewAt(position);
+            int indicatorWidth = tabView.getWidth();
+            int indicatorLeft = (int) ((position + positionOffset) * indicatorWidth);
+
+            final FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) indicator.getLayoutParams();
+            layoutParams.width = indicatorWidth;
+            layoutParams.setMargins(indicatorLeft, 0, 0, 0);
+            indicator.setLayoutParams(layoutParams);
+        }
+    }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {

@@ -8,12 +8,35 @@
   -->
 <resources>
 
+    <color name="white">#ffffff</color>
+    <color name="orange">#ff5500</color>
+    <color name="primaryDark">#00695C</color>
+    <color name="primary">#00897B</color>
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/ActionBarStyle</item>
+        <item name="actionBarStyle">@style/ActionBarStyle</item>
         <!-- Customize your theme here. -->
         <item name="android:colorPrimaryDark">#00695C</item>
         <item name="android:colorPrimary">#00897B</item>
         <item name="android:colorAccent">#FFD54F</item>
+    </style>
+
+    <style name="ActionBarStyle" parent="android:Widget.Holo.ActionBar.Solid">
+        <item name="android:background">@color/primary</item>
+        <item name="background">@color/primary</item>
+        <item name="android:titleTextStyle">@style/MyTheme.ActionBarStyle</item>
+        <item name="titleTextStyle">@style/MyTheme.ActionBarStyle</item>
+        <!--<item name="android:subtitleTextStyle">@style/ActionBarSubitleStyle</item>-->
+    </style>
+
+    <style name="MyTheme.ActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:titleTextStyle">@style/MyTheme.ActionBar.TitleTextStyle</item>
+    </style>
+
+    <style name="MyTheme.ActionBar.TitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/white</item>
     </style>
 
 </resources>
