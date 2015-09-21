@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp">
+
+    <TextView
+        android:id="@+id/TitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:textSize="18sp"
+        android:text="Title"/>
+
+    <TextView
+        android:id="@+id/SubTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TitleText"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/TitleText"
+        android:text="Description"/>
+
+    <TextView
+        android:id="@+id/HatebuText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TitleText"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/SubTitleText"
+        android:text="23 users"
+        android:textColor="@android:color/holo_red_dark"/>
+
+    <TextView
+        android:id="@+id/DateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TitleText"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/HatebuText"
+        android:text="09/21 19:51"
+        android:textColor="@android:color/darker_gray"/>
+
+
+</RelativeLayout>
+<!-- From: file:/Users/himara2/Documents/android/Matome/MatomChannel/src/main/res/layout/list_item.xml -->
