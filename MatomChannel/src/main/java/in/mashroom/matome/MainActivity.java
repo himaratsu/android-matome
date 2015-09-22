@@ -55,9 +55,6 @@ public class MainActivity extends ActionBarActivity {
     mActivity = this;
     setContentView(R.layout.activity_main);
 
-    Log.d("debug", "onCreate");
-    Toast.makeText(this, "Hellooooo", Toast.LENGTH_SHORT).show();
-
     ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
     // Create the adapter that will return a fragment for each of the three

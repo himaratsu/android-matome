@@ -54,7 +54,6 @@ public class BaseEntryFlagment extends Fragment {
     public void onDetach() {
         query.cancel();
         super.onDetach();
-        Toast.makeText(getActivity(), "onDetach", Toast.LENGTH_SHORT).show();
     }
 
 }
