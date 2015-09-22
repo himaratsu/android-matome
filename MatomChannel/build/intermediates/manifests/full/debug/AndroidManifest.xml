@@ -37,7 +37,7 @@
 
         <activity
             android:name="in.mashroom.matome.MainActivity"
-            android:label="@string/app_name" >
+            android:label="まとめリーダ" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -26,17 +26,6 @@
     <style name="ActionBarStyle" parent="android:Widget.Holo.ActionBar.Solid">
         <item name="android:background">@color/primary</item>
         <item name="background">@color/primary</item>
-        <item name="android:titleTextStyle">@style/MyTheme.ActionBarStyle</item>
-        <item name="titleTextStyle">@style/MyTheme.ActionBarStyle</item>
-        <!--<item name="android:subtitleTextStyle">@style/ActionBarSubitleStyle</item>-->
-    </style>
-
-    <style name="MyTheme.ActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:titleTextStyle">@style/MyTheme.ActionBar.TitleTextStyle</item>
-    </style>
-
-    <style name="MyTheme.ActionBar.TitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/white</item>
     </style>
 
 </resources>

@@ -253,8 +253,8 @@
     <!-- From: file:/Users/himara2/Documents/android/Matome/MatomChannel/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings">Settings</string>
-    <string name="app_name">まとめのまとめ</string>
-    <string name="banner_ad_unit_id">ca-app-pub-5042077439159662/2800485756</string>
+    <string name="app_name">まとめリーダ</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
     <!-- From: file:/Users/himara2/Documents/android/Matome/MatomChannel/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/common_strings.xml -->
     <eat-comment/>
     <string name="common_android_wear_notification_needs_update_text">An application requires an update to the Android Wear app.</string>
@@ -315,9 +315,6 @@
     <style name="ActionBarStyle" parent="android:Widget.Holo.ActionBar.Solid">
         <item name="android:background">@color/primary</item>
         <item name="background">@color/primary</item>
-        <item name="android:titleTextStyle">@style/MyTheme.ActionBarStyle</item>
-        <item name="titleTextStyle">@style/MyTheme.ActionBarStyle</item>
-        <!--<item name="android:subtitleTextStyle">@style/ActionBarSubitleStyle</item>-->
     </style>
     <!-- From: file:/Users/himara2/Documents/android/Matome/MatomChannel/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
@@ -1251,16 +1248,6 @@
         <item name="android:scaleType">center</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
-    <!-- From: file:/Users/himara2/Documents/android/Matome/MatomChannel/src/main/res/values/styles.xml -->
-    <eat-comment/>
-    <style name="MyTheme.ActionBar.TitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/white</item>
-    </style>
-    <style name="MyTheme.ActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:titleTextStyle">@style/MyTheme.ActionBar.TitleTextStyle</item>
-    </style>
-    <!-- From: file:/Users/himara2/Documents/android/Matome/MatomChannel/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
-    <eat-comment/>
     <style name="Platform.AppCompat" parent="android:Theme">
         <item name="android:windowNoTitle">true</item>
 

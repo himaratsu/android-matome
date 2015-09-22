@@ -90,6 +90,7 @@ public class MainActivity extends ActionBarActivity {
 
     // ActionBar下の影を消す
     getSupportActionBar().setElevation(0);
+    getSupportActionBar().setDisplayShowTitleEnabled(true);
 
     // タブ下に影を出す
     float elevation = 4 * getResources().getDisplayMetrics().density;
