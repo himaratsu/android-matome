@@ -52,7 +52,12 @@ public class CustomListItemAdapter extends ArrayAdapter<ParseObject> {
         text2.setText(entry.getString("blogTitle"));
 
         TextView hatebuText = (TextView) view.findViewById(R.id.HatebuText);
-        hatebuText.setText(entry.getNumber("hatebu").toString() + " users");
+        Number hatebuNumber = entry.getNumber("hatebu");
+        if (hatebuNumber != null) {
+            hatebuText.setText(hatebuNumber.toString() +" users");
+        } else {
+            hatebuText.setText("0 users");
+        }
 
         TextView dateText = (TextView) view.findViewById(R.id.DateText);
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd HH:mm");
