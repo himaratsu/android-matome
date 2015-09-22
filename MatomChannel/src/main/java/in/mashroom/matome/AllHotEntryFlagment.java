@@ -24,12 +24,7 @@ import java.util.List;
 /**
  * Created by himara2 on 15/09/21.
  */
-public class AllHotEntryFlagment extends Fragment {
-
-    ListView lv;
-    MainActivity mActivity;
-
-    private View view;
+public class AllHotEntryFlagment extends BaseEntryFlagment {
 
     public AllHotEntryFlagment() {}
 
@@ -37,8 +32,8 @@ public class AllHotEntryFlagment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        if(view==null) {
-            view=inflater.inflate(R.layout.activity_latest_entry, container,false);
+        if (view==null) {
+            view = inflater.inflate(R.layout.activity_latest_entry, container,false);
         } else {
             ViewGroup parent = (ViewGroup) view.getParent();
             parent.removeView(view);
@@ -62,23 +57,10 @@ public class AllHotEntryFlagment extends Fragment {
         return view;
     }
 
-    public void fetchParse() {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Entry");
+    @Override
+    public ParseQuery<ParseObject> constructQuery() {
+        query = ParseQuery.getQuery("Entry");
         query.orderByDescending("hatebu");
-        FindCallback<ParseObject> callback = new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> results, com.parse.ParseException e) {
-                if (results == null) {
-                    Log.d("entry", "The getFirst request failed.");
-                } else {
-                    Log.d("entry", "Retrieved the object." + results.get(0).getString("title"));
-
-                    CustomListItemAdapter adapter = new CustomListItemAdapter(getActivity(), results);
-                    lv = (ListView)view.findViewById(R.id.listView1);
-                    lv.setAdapter(adapter);
-                }
-            }
-        };
-        query.findInBackground(callback);
+        return query;
     }
 }

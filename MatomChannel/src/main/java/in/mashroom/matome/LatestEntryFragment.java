@@ -29,12 +29,7 @@ import java.util.List;
 /**
  * Created by himara2 on 15/09/21.
  */
-public class LatestEntryFragment extends Fragment {
-
-    ListView lv;
-    MainActivity mActivity;
-
-    private View view;
+public class LatestEntryFragment extends BaseEntryFlagment {
 
     public LatestEntryFragment() {}
 
@@ -67,25 +62,11 @@ public class LatestEntryFragment extends Fragment {
         return view;
     }
 
-    public void fetchParse() {
+    @Override
+    public ParseQuery<ParseObject> constructQuery() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Entry");
         query.orderByDescending("posttime");
-        query.setLimit(100);
-        FindCallback<ParseObject> callback = new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> results, com.parse.ParseException e) {
-                if (results == null) {
-                    Log.d("entry", "The getFirst request failed.");
-                } else {
-                    Log.d("entry", "Retrieved the object." + results.get(0).getString("title"));
-
-                    CustomListItemAdapter adapter = new CustomListItemAdapter(getActivity(), results);
-                    lv = (ListView)view.findViewById(R.id.listView1);
-                    lv.setAdapter(adapter);
-                }
-            }
-        };
-        query.findInBackground(callback);
+        return query;
     }
 
 }
