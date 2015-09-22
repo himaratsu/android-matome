@@ -1530,8 +1530,8 @@ containing a value of this type.
         public static final int notification_template_icon_bg=0x7f02003b;
     }
     public static final class id {
-        public static final int DateText=0x7f0c0055;
-        public static final int HatebuText=0x7f0c0054;
+        public static final int DateText=0x7f0c0054;
+        public static final int HatebuText=0x7f0c0055;
         public static final int SubTitleText=0x7f0c0053;
         public static final int TitleText=0x7f0c0052;
         public static final int action0=0x7f0c0056;

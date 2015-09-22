@@ -78,9 +78,11 @@ public class DayHotEntryFlagment extends Fragment {
                 } else {
                     Log.d("entry", "Retrieved the object." + results.get(0).getString("title"));
 
-                    CustomListItemAdapter adapter = new CustomListItemAdapter(getActivity(), results);
-                    lv = (ListView)view.findViewById(R.id.listView1);
-                    lv.setAdapter(adapter);
+                    if (results.size() > 0) {
+                        CustomListItemAdapter adapter = new CustomListItemAdapter(getActivity(), results);
+                        lv = (ListView) view.findViewById(R.id.listView1);
+                        lv.setAdapter(adapter);
+                    }
                 }
             }
         };

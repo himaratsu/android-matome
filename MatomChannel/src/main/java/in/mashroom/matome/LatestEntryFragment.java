@@ -69,6 +69,8 @@ public class LatestEntryFragment extends Fragment {
 
     public void fetchParse() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Entry");
+        query.orderByDescending("posttime");
+        query.setLimit(100);
         FindCallback<ParseObject> callback = new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> results, com.parse.ParseException e) {

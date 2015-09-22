@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.parse.ParseObject;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -46,12 +47,17 @@ public class CustomListItemAdapter extends ArrayAdapter<ParseObject> {
         // 各Viewに表示する情報を設定
         TextView text1 = (TextView) view.findViewById(R.id.TitleText);
         text1.setText(entry.getString("title"));
+
         TextView text2 = (TextView) view.findViewById(R.id.SubTitleText);
         text2.setText(entry.getString("blogTitle"));
+
         TextView hatebuText = (TextView) view.findViewById(R.id.HatebuText);
         hatebuText.setText(entry.getNumber("hatebu").toString() + " users");
+
         TextView dateText = (TextView) view.findViewById(R.id.DateText);
-        dateText.setText(entry.getCreatedAt().toString());
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd HH:mm");
+        String formatString = sdf.format(entry.getDate("posttime").getTime());
+        dateText.setText(formatString);
 
         return view;
     }
