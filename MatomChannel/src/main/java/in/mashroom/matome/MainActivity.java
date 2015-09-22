@@ -38,7 +38,8 @@ import com.parse.ParseQuery;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -101,6 +102,11 @@ public class MainActivity extends ActionBarActivity {
       }
     });
 
+
+    // Ad
+    AdView mAdView = (AdView) findViewById(R.id.adView);
+    AdRequest adRequest = new AdRequest.Builder().build();
+    mAdView.loadAd(adRequest);
   }
 
     private class PageChangeListener implements ViewPager.OnPageChangeListener {
